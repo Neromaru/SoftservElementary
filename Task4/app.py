@@ -5,7 +5,7 @@ from shutil import move
 
 class FileParser:
 
-    def __init__(self, path=None, searched=None, replacer=None):
+    def __init__(self, path, searched, replacer=None):
         self.path = path
         self.searched = searched
         self.replacer = replacer
@@ -22,13 +22,8 @@ class FileParser:
         with open(self.path, 'r+') as file:
             return function(file)
 
-    def _temp_file_init(self):
-        with open(self.temp, 'w+'):
-            pass
-
     def _file_writer(self, file):
-        self._temp_file_init()
-        with open(self.temp, 'a+') as writer:
+        with open(self.temp, 'w+') as writer:
             for line in file:
                 writer.write(line.replace(self.searched, self.replacer))
 

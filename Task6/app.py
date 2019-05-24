@@ -2,6 +2,12 @@ import os
 from string import punctuation
 
 
+NULLIFY = 0
+POINT = 1
+HALF = 2
+TICKET_LENGTH_RESTRICTION = 6
+
+
 class LuckyTickets:
 
     def __init__(self, path='', mode=''):
@@ -17,7 +23,8 @@ class LuckyTickets:
 
     @staticmethod
     def _validate_line(line):
-        if punctuation in line or len(line) != 6 or not isinstance(line, str):
+        if punctuation in line or len(line) != TICKET_LENGTH_RESTRICTION\
+                or not isinstance(line, str):
             raise ValueError('Line should have only 1 ticker without any '
                              'punctuaction')
         return True
@@ -31,22 +38,22 @@ class LuckyTickets:
 
     @staticmethod
     def moscow(ticket):
-        ticket_half = len(ticket)//2
+        ticket_half = len(ticket)//HALF
         first_half = sum(map(lambda x: int(x), ticket[:ticket_half]))
         second_half = sum(map(lambda x: int(x), ticket[ticket_half:]))
         if first_half == second_half:
-            return 1
+            return POINT
         else:
-            return 0
+            return NULLIFY
 
     @staticmethod
     def piter(ticket):
         even_sum = sum(map(lambda x: int(x), ticket[0::2]))
         odd_sum = sum(map(lambda x: int(x), ticket[1::2]))
         if even_sum == odd_sum:
-            return 1
+            return POINT
         else:
-            return 0
+            return NULLIFY
 
     def run_mode(self):
         if self.mode == 'Moscow' or self.mode == 'moscow':
@@ -74,7 +81,7 @@ def main():
         if confirm not in ['Y', 'y']:
             exiting = True
         else:
-            lucky.score = 0
+            lucky.score = NULLIFY
 
 
 if __name__ == '__main__':

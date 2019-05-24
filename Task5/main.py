@@ -31,6 +31,9 @@ ADDITIONS = {
     3: " Милиард"
     }
 
+DIGITAL_LEFT_BORDER = 1
+DIGITAL_RIGHT_BORDER = 5
+
 
 class NumToWords:
 
@@ -63,9 +66,10 @@ class NumToWords:
 
     @staticmethod
     def _proceed_addition(last_d, hundreds, addition):
-        if last_d == 1 and addition != ADDITIONS[0]:
+        if last_d == DIGITAL_LEFT_BORDER and addition != ADDITIONS[0]:
             return "{h}{add}a".format(h=hundreds, add=addition)
-        elif 1 < last_d < 5 and addition != ADDITIONS[0]:
+        elif DIGITAL_LEFT_BORDER < last_d < DIGITAL_RIGHT_BORDER and addition \
+                != ADDITIONS[0]:
             if addition != ADDITIONS[1]:
                 return "{h}{add}a".format(h=hundreds, add=addition)
             return "{h}{add}и".format(h=hundreds, add=addition)

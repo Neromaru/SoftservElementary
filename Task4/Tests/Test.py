@@ -12,8 +12,8 @@ def file_read_first_line(file):
 class TestFileParser(unittest.TestCase):
 
     def test_count_substrings_in_file(self):
-        initial = FileParser("TestText", 'Lorem')
-        expected = 84
+        initial = FileParser("TestText", 'IPSUM')
+        expected = 8
         return self.assertEqual(
             initial.file_reader(
                 initial.count_substring_in_file),
@@ -30,7 +30,7 @@ class TestFileParser(unittest.TestCase):
     def test_replacewords_in_file(self):
         initial = FileParser("TestText", 'Lorem', 'IPSUM')
         initial.replace_words_in_file()
-        comapre_data = file_read_first_line(initial.path)
+        comapre_data = file_read_first_line(initial.path).rstrip()
         expected = "IPSUM IPSUM is simply dummy " \
                    "text of the printing and typesetting industry."
         return self.assertEqual(comapre_data, expected)

@@ -10,16 +10,13 @@ class Envelope:
     def _sort_values_ascending(self):
         if self.width < self.height:
             self.width, self.height = self.height, self.width
-        return self
 
     def _diagonals(self):
         self.diagonal = sqrt(pow(self.width, 2) + pow(self.height, 2))
-        return self
 
     def _find_sin_to_diag(self):
         self._diagonals()
         self.sin = self.height/self.diagonal
-        return self
 
     def _projection_on_wall_while_rotated(self):
         self._find_sin_to_diag()
@@ -28,7 +25,6 @@ class Envelope:
     def prepare_envelope_to_pack(self):
         self._projection_on_wall_while_rotated()
         self._sort_values_ascending()
-        return self
 
 
 class EnvelopeComparator:

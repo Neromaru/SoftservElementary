@@ -1,5 +1,6 @@
 from math import sqrt
 
+NOT_EXISTS = 0
 
 class TriangleBank:
 
@@ -14,7 +15,7 @@ class TriangleBank:
         return no_tabs
 
     @staticmethod
-    def geron(side_a, side_b, side_c):
+    def _geron(side_a, side_b, side_c):
         half_perim = (side_a + side_b + side_c)/2
         square = sqrt(
             half_perim
@@ -31,7 +32,8 @@ class TriangleBank:
     @staticmethod
     def triangle_exists(side_1, side_2, side_3):
         side_a, side_b, side_c = float(side_1), float(side_2), float(side_3)
-        if side_a == 0 or side_b == 0 or side_c == 0:
+        if side_a == NOT_EXISTS or side_b == NOT_EXISTS \
+                or side_c == NOT_EXISTS:
             return False
         elif side_a + side_b <= side_c \
                 or side_a + side_c <= side_b \
@@ -41,7 +43,7 @@ class TriangleBank:
 
     def _proceed_and_add_to_bank(self, name, side_a, side_b, side_c):
         key = self.normalize_string(name)
-        square = self.geron(float(side_a), float(side_b), float(side_c))
+        square = self._geron(float(side_a), float(side_b), float(side_c))
         if self.bank.get(key):
             self.bank[key]['square'] = square
         else:
@@ -86,3 +88,25 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+class Singleton(object):
+
+    def __new__(cls):
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(Singleton, cls).__new__(cls)
+        return cls.instance
+
+
+class Student:
+    def __init__(self, name, surname, second_name, session_mark):
+        self.name = name
+        self.surname = surname
+        self.second_name = second_name
+        self.session = session_mark
+
+    def has_grant(self, avg_mark):
+        if self.session > avg_mark:
+            return True
+        return False
+

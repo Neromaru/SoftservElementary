@@ -21,22 +21,21 @@ class LuckyTicketsTest(unittest.TestCase):
     def test_number_of_moscow_tickets_in_test_file(self):
         initila = LuckyTickets(path='Test', mode='moscow')
         expected = 4
-        return self.assertEqual(initila.run_mode(),
+        result = initila.run_mode()
+        return self.assertEqual(result,
                                 expected
                                 )
 
     def test_moscow(self):
         initial = LuckyTickets()
         expected = 1
+        result = initial.moscow('111111')
         return self.assertEqual(
-            initial.moscow('1111111'),
-            expected
-            )
+            expected, result)
 
     def test_piter(self):
         initial = LuckyTickets()
         expected = 1
+        result = initial.piter('111111')
         return self.assertEqual(
-            initial.piter('1111111'),
-            expected
-            )
+            expected, result)
